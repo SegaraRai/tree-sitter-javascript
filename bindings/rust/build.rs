@@ -7,8 +7,20 @@ fn main() {
         .include(src_dir)
         .flag_if_supported("-Wno-unused-parameter");
 
-    #[cfg(target_env = "msvc")]
-    c_config.flag("-utf-8");
+    let target = std::env::var("TARGET").unwrap();
+    if target.contains("windows-msvc") {
+        c_config.flag("/utf-8");
+    }
+    if target == "wasm32-unknown-unknown" {
+        let Ok(wasm_headers) = std::env::var("DEP_TREE_SITTER_LANGUAGE_WASM_HEADERS") else {
+            panic!("Environment variable DEP_TREE_SITTER_LANGUAGE_WASM_HEADERS must be set");
+        };
+        c_config.include(&wasm_headers);
+        c_config.define("NEED_WASM_EXTRA_H", None);
+
+        // Prevent duplicate symbol error in WASM linking.
+        c_config.define("NDEBUG", None);
+    }
 
     let parser_path = src_dir.join("parser.c");
     c_config.file(&parser_path);
