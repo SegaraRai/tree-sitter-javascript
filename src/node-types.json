@@ -1208,6 +1208,11 @@
     }
   },
   {
+    "type": "false",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "field_definition",
     "named": true,
     "fields": {
@@ -2245,6 +2250,11 @@
     }
   },
   {
+    "type": "null",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "object",
     "named": true,
     "fields": {},
@@ -2648,6 +2658,11 @@
     }
   },
   {
+    "type": "super",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "switch_body",
     "named": true,
     "fields": {},
@@ -2817,6 +2832,11 @@
     }
   },
   {
+    "type": "this",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "throw_statement",
     "named": true,
     "fields": {},
@@ -2834,6 +2854,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "true",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "try_statement",
@@ -3396,7 +3421,7 @@
   },
   {
     "type": "false",
-    "named": true
+    "named": false
   },
   {
     "type": "finally",
@@ -3469,7 +3494,7 @@
   },
   {
     "type": "null",
-    "named": true
+    "named": false
   },
   {
     "type": "number",
@@ -3533,7 +3558,7 @@
   },
   {
     "type": "super",
-    "named": true
+    "named": false
   },
   {
     "type": "switch",
@@ -3545,7 +3570,7 @@
   },
   {
     "type": "this",
-    "named": true
+    "named": false
   },
   {
     "type": "throw",
@@ -3553,7 +3578,7 @@
   },
   {
     "type": "true",
-    "named": true
+    "named": false
   },
   {
     "type": "try",
