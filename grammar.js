@@ -677,9 +677,12 @@ module.exports = grammar({
 
     jsx_identifier: _ => /[a-zA-Z_$][a-zA-Z\d_$]*-[a-zA-Z\d_$\-]*/,
 
+    jsx_keyword_identifier: _ => choice(...RESERVED_WORDS, ...CONTEXTUAL_KEYWORDS),
+
     _jsx_identifier: $ => choice(
       alias($.jsx_identifier, $.identifier),
       $.identifier,
+      alias($.jsx_keyword_identifier, $.identifier),
     ),
 
     nested_identifier: $ => prec('member', seq(
@@ -688,11 +691,20 @@ module.exports = grammar({
       field('property', alias($.identifier, $.property_identifier)),
     )),
 
+    jsx_member_expression: $ => prec('member', seq(
+      field('object', choice(
+        $._jsx_identifier,
+        alias($.jsx_member_expression, $.member_expression),
+      )),
+      '.',
+      field('property', alias($._jsx_identifier, $.property_identifier)),
+    )),
+
     jsx_namespace_name: $ => seq($._jsx_identifier, ':', $._jsx_identifier),
 
     _jsx_element_name: $ => choice(
       $._jsx_identifier,
-      alias($.nested_identifier, $.member_expression),
+      alias($.jsx_member_expression, $.member_expression),
       $.jsx_namespace_name,
     ),
 
@@ -711,7 +723,10 @@ module.exports = grammar({
 
     _jsx_attribute: $ => choice($.jsx_attribute, $.jsx_expression),
 
-    _jsx_attribute_name: $ => choice(alias($._jsx_identifier, $.property_identifier), $.jsx_namespace_name),
+    _jsx_attribute_name: $ => choice(
+      alias($._jsx_identifier, $.property_identifier),
+      $.jsx_namespace_name,
+    ),
 
     jsx_attribute: $ => seq(
       $._jsx_attribute_name,

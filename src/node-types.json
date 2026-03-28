@@ -1636,6 +1636,11 @@
     }
   },
   {
+    "type": "identifier",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "if_statement",
     "named": true,
     "fields": {
@@ -3455,10 +3460,6 @@
     "type": "html_comment",
     "named": true,
     "extra": true
-  },
-  {
-    "type": "identifier",
-    "named": true
   },
   {
     "type": "if",
