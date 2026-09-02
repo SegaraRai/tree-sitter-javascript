@@ -22,7 +22,7 @@ const CONTEXTUAL_KEYWORDS = [
   'get', 'set', 'async', 'await', 'static', 'export', 'let',
 ];
 
-module.exports = grammar({
+export default grammar({
   name: 'javascript',
 
   externals: $ => [
